@@ -1,0 +1,99 @@
+.description-dialog-view {
+	z-index: 40;
+	font-family: Roboto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.description-dialog-view.light-theme {
+	background-color: rgba(220, 220, 237, 0.5);
+}
+
+.description-dialog-container {
+	position: relative;
+	width: 70%;
+	max-width: 70%;
+	padding: 10px 20px 20px 20px;
+	border-radius: 16px;
+	background-color: #424242;
+}
+
+.description-dialog-row {
+	display: grid;
+	grid-auto-flow: column;
+	grid-gap: 20px;
+}
+
+.description-dialog-text-container {
+	align-items: center;
+}
+
+.description-dialog-text {
+	font-size: 25px;
+	text-align: left;
+	color: #ffffff;
+}
+
+a.description-dialog-link,
+a.description-dialog-link.link,
+a.description-dialog-link.visited,
+a.description-dialog-link.active {
+	color: #88bbb6 !important;
+}
+
+a.description-dialog-link.focus,
+a.description-dialog-link.hover {
+	background-color: #617876;
+}
+
+.description-dialog-qr-container {
+	display: flex;
+	width: 340px;
+	align-items: center;
+}
+
+.description-dialog-text-container .title {
+	font-size: 34px;
+	color: white;
+	font-weight: 700 !important;
+}
+
+.description-dialog-text-container .creator {
+	font-size: 25px;
+	color: white;
+}
+
+.close-btn {
+	text-align: right;
+	margin-bottom: 5px;
+}
+
+@media screen and (max-width: 1281px) {
+	.description-dialog-text-container .title {
+		font-size: 23px;
+		margin-bottom: 2px;
+	}
+
+	.description-dialog-text-container .creator {
+		font-size: 18px;
+		margin-bottom: 0;
+	}
+
+	.description-dialog-text {
+		font-size: 17px;
+	}
+
+	.description-dialog-qr-container img {
+		width: 230px;
+		height: 230px;
+	}
+
+	.description-dialog-qr-container {
+		width: 230px;
+	}
+
+	.close-btn img {
+		width: 16px;
+	}
+}

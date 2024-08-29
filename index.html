@@ -1,0 +1,268 @@
+<!--
+Copyright (c) 2020-2023 LG Electronics Inc.
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,
+            maximum-scale=1.0" />
+	<title>OFTV</title>
+	<link rel="stylesheet" href="css/libs/bootstrap4.4.1.min.css" />
+	<link rel="stylesheet" href="css/libs/rangeslider.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/navigation.css" />
+	<link rel="stylesheet" href="css/media-grid.css" />
+	<link rel="stylesheet" href="css/slider.css" />
+	<link rel="stylesheet" href="css/slider-player.css" />
+	<link rel="stylesheet" href="css/description-dialog.css" />
+	<link rel="stylesheet" href="css/search.css" />
+	<link rel="stylesheet" href="css/creators.css" />
+</head>
+
+<body>
+	<div id="app" class="hidden">
+		<div class="media-grid-view dark-theme" id="media-grid-container">
+			<div class="slideshow-container slider"></div>
+			<div class="logo-container">
+				<img src="images/oftv-logo-white.png" />
+			</div>
+			<div class="sliders-dots-container"></div>
+			<div class="large-thumbnail-container">
+				<img src="images/placeholder.png" class="large-thumbnail" />
+				<div class="large-thumbnail-left-shadow"></div>
+				<div class="large-thumbnail-bottom-shadow"></div>
+			</div>
+			<div class="focused-content-info-container inactive"></div>
+			<div class="media-grid-rows-window inactive">
+				<div class="media-grid-rows-container"></div>
+			</div>
+		</div>
+		<div class="media-grid-view dark-theme hidden" id="playlist-episode-container">
+			<div class="large-thumbnail-container">
+				<img src="images/placeholder.png" class="large-thumbnail" />
+				<div class="large-thumbnail-left-shadow"></div>
+				<div class="large-thumbnail-bottom-shadow"></div>
+			</div>
+			<div class="focused-content-info-container inactive"></div>
+			<div class="media-grid-rows-window">
+				<div class="media-grid-rows-container"></div>
+			</div>
+		</div>
+		<div id="preloader" class="hidden">
+			<img class="loading" src="images/loading-icon.png" alt="Loading" />
+		</div>
+
+		<div id="video-container" class="hidden">
+			<video class="position-absolute" id="my-video" type="application/avplayer"
+				style="width: 100%; height: 100%"></video>
+
+			<div class="video-error">
+				<img class="video-thumbnail" src="images/def_image.png" />
+			</div>
+			<div id="video-title-creator-container">
+				<div class="video-title"></div>
+				<div class="video-creator"></div>
+				<div class="video-details" onmouseenter="videoPlayerVariables.hoverVideoDetails()"
+					onclick="videoPlayerVariables.showVideoDetails()">
+					<p>Details</p>
+				</div>
+			</div>
+
+			<div id="video-player-controller">
+				<div id="progress-controls-container">
+					<div class="video-control-icon-container">
+						<div class="video-control-icon replay text-center"
+							onmouseenter="videoPlayerVariables.hoverVideoControlIcon(0)" onclick="replayVideo()"></div>
+
+						<div class="video-control-icon previous text-center"
+							onmouseenter="videoPlayerVariables.hoverVideoControlIcon(1)"
+							onclick="videoPlayerVariables.showNextVideo(-1)"></div>
+
+						<div class="video-control-icon play-pause text-center play"
+							onmouseenter="videoPlayerVariables.hoverVideoControlIcon(2)"
+							onclick="videoPlayerVariables.playPauseVideo()"></div>
+
+						<div class="video-control-icon next text-center"
+							onmouseenter="videoPlayerVariables.hoverVideoControlIcon(3)"
+							onclick="videoPlayerVariables.showNextVideo(1)"></div>
+					</div>
+					<div id="progress-container">
+						<div id="progressbar-container" onmouseenter="videoPlayerVariables.hoverSeekBar()">
+							<input class="video-progress-bar-slider" type="range" data-rangeslider />
+						</div>
+
+						<div id="video-time-container">
+							<span id="current-time" class="video-time video-current-time text-left">--:--</span>
+							<span id="duration" class="video-time text-right video-total-time text-right">--:--</span>
+						</div>
+					</div>
+				</div>
+				<div id="mtw">
+					<div class="title">More To Watch</div>
+					<div class="swiper-prev-btn-container hidden" onmouseleave="mediaGridPage.leaveNextButton(0)"
+						onmouseenter="mediaGridPage.hoverNextButton(this.getAttribute('data-layout'),-1)"
+						onclick="mediaGridPage.clickNextButton(this.getAttribute('data-layout'), 0,-1)"
+						data-layout="mtw">
+						<div class="swiper-prev-button"><img src="images/playlist-left-arrow-blue.svg"></div>
+					</div>
+					<div class="episodes"></div>
+					<div class="swiper-next-btn-container hidden" onmouseleave="mediaGridPage.leaveNextButton(0)"
+						onmouseenter="mediaGridPage.hoverNextButton(this.getAttribute('data-layout'),1)"
+						onclick="mediaGridPage.clickNextButton(this.getAttribute('data-layout'), 0,1)"
+						data-layout="mtw">
+						<div class="swiper-next-button"><img src="images/playlist-right-arrow-blue.svg"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="navigation-view" id="navigation-view">
+			<div class="navigation-tabs-container" onmouseenter="navPage.hoverNav()">
+				<div class="navigation-logo-container hidden">
+					<img src="images/oftv-logo-menu-white.png" />
+				</div>
+				<div class="navigation-tabs-inner-container"></div>
+			</div>
+		</div>
+
+		<div id="search-container" class="hidden">
+			<div class="search-view full-screen-view dark-theme" id="search-view">
+				<div class="query-container">
+					<input type="text" maxlength="20" name="query" class="query-input dark-theme active"
+						onmouseenter="searchPage.hoverSearchBar()" onkeyup="searchPage.searchValueChange()"
+						onchange="searchPage.searchValueChange()" placeholder="Search..." />
+					<img src="images/oftv-logo-menu-white.png" class="logo-image" />
+				</div>
+
+				<div class="videos-container">
+					<div class="media-grid-rows-container"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="creators-container" class="hidden">
+			<div class="creators-view full-screen-view dark-theme" id="creators-view">
+				<div class="query-container">
+					<input type="text" maxlength="20" name="query" class="query-input dark-theme"
+						onmouseenter="creatorsPage.hoverSearchBar()" onkeyup="creatorsPage.searchValueChange()"
+						onchange="creatorsPage.searchValueChange()" placeholder="Search..." />
+					<img src="images/oftv-logo-menu-white.png" class="logo-image" />
+				</div>
+				<div class="categories-container">
+					<h3 class="categories-title">Categories</h3>
+					<div class="category-prev-btn-container" onmouseleave="creatorsPage.leaveNextButton()"
+						onmouseenter="creatorsPage.hoverNextButton(-1)" onclick="creatorsPage.clickNextButton(-1)">
+						<div class="category-prev-button">
+							<img src="images/playlist-left-arrow-blue.svg" />
+						</div>
+					</div>
+					<div class="categories-grid-row"></div>
+					<div class="category-next-btn-container" onmouseleave="creatorsPage.leaveNextButton()"
+						onmouseenter="creatorsPage.hoverNextButton(1)" onclick="creatorsPage.clickNextButton(1)">
+						<div class="category-next-button">
+							<img src="images/playlist-right-arrow-blue.svg" />
+						</div>
+					</div>
+				</div>
+				<div class="creators-title-container">
+					<h3 class="creators-title focused"></h3>
+				</div>
+				<div class="creators-container">
+					<div class="media-grid-rows-container"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="turn-off-modal" data-backdrop="static">
+		<div class="modal-dialog modal-lg turn-off">
+			<div class="modal-content modal-bg-cyan">
+				<div class="modal-body">
+					<h4 class="modal-text-1 text-center" id="exit-modal-title" data-word_code="exit">
+						Exit
+					</h4>
+					<h5 class="modal-text-1 text-center" id="exit-modal-desc" data-word_code="exit_description">
+						Are you sure you want to exit OFTV?
+					</h5>
+					<div class="modal-button-wrapper text-right" id="exit-modal-btn-container">
+						<button type="button" id="exit-modal-cancel" class="btn modal-btn exit-modal-button"
+							data-word_code="no" onmouseenter="turnOffModal.hoverMenuItem(0)"
+							onclick="turnOffModal.handleMenuClick()">
+							No
+						</button>
+						<button type="button" class="btn modal-btn exit-modal-button" id="exit-modal-btn"
+							data-word_code="yes" onmouseenter="turnOffModal.hoverMenuItem(1)"
+							onclick="turnOffModal.handleMenuClick()">
+							Yes
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="slider-description-modal" data-backdrop="static">
+		<div class="modal-lg">
+			<div class="modal-body">
+				<div class="description-dialog-view full-screen-view dark-theme" id="controller-0-description-dialog">
+					<div class="description-dialog-container dark-theme">
+						<div class="close-btn">
+							<img src="images/close.png" class="img" onmouseenter="descriptionModal.hoverCloseButton()"
+								onclick="descriptionModal.closeModal()" />
+						</div>
+						<div class="description-dialog-row" onmouseenter="descriptionModal.hoverModalContents()">
+							<div class="description-dialog-text-container dark-theme">
+								<p class="title"></p>
+								<p class="creator"></p>
+								<div class="description-dialog-text dark-theme"></div>
+							</div>
+							<div class="description-dialog-qr-container"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="toast">
+		<div id="toast-body">Some text inside the toast body</div>
+	</div>
+
+	<div id="splash-image-container" class="height-100 text-center">
+		<div class="splash-image">
+			<img src="images/splash-image.gif" class="loading-gif" />
+		</div>
+	</div>
+
+	<script src="js/libs/jquery.3.4.1.min.js"></script>
+	<script src="js/libs/bootstrap.4.4.1.min.js"></script>
+	<script src="js/libs/rangeslider.js"></script>
+	<script src="js/helpers/zype-api-helpers.js"></script>
+	<script src="js/helpers/dom-helper.js"></script>
+	<script src="js/helpers/common-helpers.js"></script>
+	<script src="js/models/show-model.js"></script>
+	<script src="js/models/category-model.js"></script>
+	<script src="webOSTVjs-1.2.0/webOSTV.js"></script>
+	<script src="js/webos-key.js"></script>
+	<script src="js/operations-key.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/base.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/auth.js"></script>
+	<script src="js/home.js"></script>
+	<script src="js/description-modal.js"></script>
+	<script src="js/turn-off-modal.js"></script>
+	<script src="js/video-player.js"></script>
+	<script src="js/media-player.js"></script>
+	<script src="js/media-grid.js"></script>
+	<script src="js/nav.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/creators.js"></script>
+</body>
+
+</html>

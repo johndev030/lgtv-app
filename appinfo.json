@@ -1,0 +1,13 @@
+{
+  "id": "com.oftv.app",
+  "version": "1.0.4",
+  "vendor": "Goyk Productions Inc",
+  "type": "web",
+  "main": "index.html",
+  "title": "OFTV",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "resolution": "1920x1080",
+  "requiredPermissions": ["time.query", "activity.operation"],
+  "disableBackHistoryAPI": true
+}

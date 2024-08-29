@@ -1,0 +1,53 @@
+
+/* App Overlay Container - shows spinner
+   ========================================================================== */
+
+.app-overlay-container {
+  background: #f7f7f7;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+}
+
+.app-overlay-container {
+  background: #aaaaaa;
+}
+
+.app-overlay-container.dark-theme {
+  background: #1e1e1e;
+}
+
+.app-overlay-container.light-theme {
+  background: #ffffff;
+}
+
+.app-overlay-message {
+  color: #333;
+  text-align: center;
+  margin-top: 25%;
+}
+
+#splash-image-container, #splash-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100000 !important;
+}
+#splash-image {
+  object-fit: cover;
+  overflow: hidden;
+}
+
+ 
+.content-load-spinner, .content-load-spinner:after {
+  border-radius: 50%;
+  width: 15em;
+  height: 15em;
+}
+
+ 

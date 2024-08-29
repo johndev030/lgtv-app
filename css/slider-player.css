@@ -1,0 +1,328 @@
+#video-player-controller {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	color: #fff;
+	padding: 0 49px;
+	background: linear-gradient(180deg, rgba(36, 37, 41, 0) 0%, #242529 100%);
+	display: none;
+}
+
+#progress-controls-container {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#progress-container {
+	margin: 0 auto;
+}
+
+#progressbar-container {
+	position: relative;
+	height: 11px;
+	padding: 0;
+	border-radius: 10px;
+}
+
+#progressbar-container .progress-amount {
+	background: white;
+	height: 100%;
+	display: block;
+	width: 0%;
+	border-radius: 10px;
+}
+
+#slider-video-player-page.active {
+	background: #00aff0;
+}
+
+#video-player-controller .video-time {
+	font-size: 22px;
+	width: 50%;
+	vertical-align: middle;
+	display: inline-block;
+	margin-top: 14px;
+	font-weight: 700 !important;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+#video-time-container {
+	display: flex;
+}
+
+#video-title-creator-container {
+	position: absolute;
+	top: 0%;
+	padding: 41px 49px;
+	font-size: 30px;
+	z-index: 10;
+	color: #fff;
+	display: none;
+}
+
+.play-pause-container {
+	text-align: center;
+	padding: 19px;
+}
+
+#video-title-creator-container .video-title {
+	font-size: 32px;
+	font-weight: 700 !important;
+	line-height: 39px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+#video-title-creator-container .video-creator {
+	font-size: 22px;
+	line-height: 27px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.video-control-icon {
+	margin: 0 10px;
+	display: inline-block;
+}
+
+.video-control-icon.replay {
+	position: fixed;
+	left: 0;
+	margin-left: 49px;
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/replay.png');
+	background-color: #e1e4e7;
+}
+
+.video-control-icon.previous {
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/previous.png');
+	background-color: #e1e4e7;
+}
+
+.video-control-icon.play-pause {
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/play.png');
+	background-color: #e1e4e7;
+}
+
+.video-control-icon.play-pause.play {
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/pause.png');
+}
+
+.video-control-icon.play-pause.pause {
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/play.png');
+}
+
+.video-control-icon.active.play-pause.play {
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/pause-focused.png');
+	background-color: #00aff0;
+}
+
+.video-control-icon.active.play-pause.pause {
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/play-focused.png');
+	background-color: #00aff0;
+}
+
+.video-control-icon.next {
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-image: url('../images/player/next.png');
+	background-color: #e1e4e7;
+}
+
+.video-control-icon.active.replay {
+	background-image: url('../images/player/replay-focused.png');
+	background-color: #00aff0;
+}
+
+.video-control-icon.active.previous {
+	background-image: url('../images/player/previous-focused.png');
+	background-color: #00aff0;
+}
+
+.video-control-icon.active.play-pause {
+	background-image: url('../images/player/pause-focused.png');
+	background-color: #00aff0;
+}
+
+.video-control-icon.active.next {
+	background-image: url('../images/player/next-focused.png');
+	background-color: #00aff0;
+}
+
+.video-control-icon img {
+	height: 75px;
+	width: 75px;
+	background: #e1e4e7;
+	border-radius: 50%;
+}
+
+.video-control-icon.active img {
+	background: #00aff0;
+}
+
+.video-control-icon-container {
+	margin-bottom: 30px;
+}
+
+.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.video-details {
+	height: 52px;
+	margin-right: 12px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	background: #a6a9ad;
+	color: #242529;
+	border-radius: 10px;
+	width: max-content;
+	margin-top: 10px;
+}
+
+.video-details p {
+	font-size: 24px;
+	margin-left: 32px;
+	margin-right: 32px;
+	white-space: nowrap;
+	-webkit-line-clamp: 1;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.video-details.active {
+	background: #00aff0;
+	color: white;
+}
+
+@media screen and (max-width: 1281px) {
+	.video-control-icon.play-pause.pause,
+	.video-control-icon.next,
+	.video-control-icon.previous,
+	.video-control-icon.replay,
+	.video-control-icon.play-pause.play,
+	.video-control-icon.active.play-pause.play,
+	.video-control-icon.active.play-pause.pause {
+		height: 50px;
+		width: 50px;
+	}
+
+	.video-control-icon-container {
+		margin-bottom: 12px;
+	}
+
+	#mtw .video-title-container .video-title,
+	#mtw .title,
+	#video-player-controller .video-time {
+		font-size: 14px;
+		margin-top: 5px;
+	}
+
+	#mtw .video-title-container .video-description,
+	#mtw .video-title-container .video-duration {
+		font-size: 12px;
+	}
+
+	#video-title-creator-container .video-title {
+		font-size: 22px;
+		line-height: 24px;
+	}
+
+	.video-details {
+		height: 34px;
+		border-radius: 6px;
+	}
+
+	.video-details p {
+		font-size: 14px;
+		margin-left: 22px;
+		margin-right: 22px;
+	}
+
+	.video-control-icon.replay {
+		background-image: url('../images/player/s-replay.png');
+	}
+
+	.video-control-icon.previous {
+		background-image: url('../images/player/s-previous.png');
+	}
+
+	.video-control-icon.play-pause {
+		background-image: url('../images/player/s-play.png');
+	}
+
+	.video-control-icon.play-pause.play {
+		background-image: url('../images/player/s-pause.png');
+	}
+
+	.video-control-icon.play-pause.pause {
+		background-image: url('../images/player/s-play.png');
+	}
+
+	.video-control-icon.active.play-pause.play {
+		background-image: url('../images/player/s-pause-focused.png');
+	}
+
+	.video-control-icon.active.play-pause.pause {
+		background-image: url('../images/player/s-play-focused.png');
+	}
+
+	.video-control-icon.next {
+		background-image: url('../images/player/s-next.png');
+	}
+
+	.video-control-icon.active.replay {
+		background-image: url('../images/player/s-replay-focused.png');
+	}
+
+	.video-control-icon.active.previous {
+		background-image: url('../images/player/s-previous-focused.png');
+	}
+
+	.video-control-icon.active.play-pause {
+		background-image: url('../images/player/s-pause-focused.png');
+	}
+
+	.video-control-icon.active.next {
+		background-image: url('../images/player/s-next-focused.png');
+	}
+
+	#video-player-controller {
+		width: 0 33px;
+	}
+
+	#video-title-creator-container {
+		padding: 25px 33px;
+	}
+}
